@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Actualizando tokens para diseño minimalista con colores pastel suaves */
+  --background: #ffffff; /* Blanco neutro para fondo */
+  --foreground: #475569; /* Gris oscuro neutro para texto */
+  --card: #f0f4f8; /* Gris claro para fondos de tarjetas */
+  --card-foreground: #475569; /* Texto oscuro en tarjetas */
+  --popover: #ffffff; /* Blanco para popovers */
+  --popover-foreground: #475569; /* Texto oscuro para popovers */
+  --primary: #f8b5d0; /* Rosa suave para elementos primarios */
+  --primary-foreground: #475569; /* Texto oscuro en elementos primarios */
+  --secondary: #a7d3f2; /* Azul claro para elementos secundarios */
+  --secondary-foreground: #ffffff; /* Texto blanco en elementos secundarios */
+  --muted: #EEF7F6; /* Menta suave para elementos silenciados */
+  --muted-foreground: #475569; /* Texto oscuro en elementos silenciados */
+  --accent: #a7d3f2; /* Azul claro para acentos */
+  --accent-foreground: #475569; /* Texto oscuro en elementos de acento */
+  --destructive: #e63946; /* Rojo para acciones destructivas */
+  --destructive-foreground: #ffffff; /* Texto blanco en acciones destructivas */
+  --border: #e0e0e0; /* Gris claro para bordes */
+  --input: #ffffff; /* Campos de entrada blancos */
+  --ring: #f8b5d0; /* Anillo rosa suave para estados de enfoque */
+  --chart-1: #f0f4f8;
+  --chart-2: #d1e7dd;
+  --chart-3: #a7d3f2;
+  --chart-4: #f8b5d0;
+  --chart-5: #ffffff;
+  --radius: 0.75rem; /* Esquinas redondeadas */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #475569;
+  --sidebar-primary: #f8b5d0;
+  --sidebar-primary-foreground: #475569;
+  --sidebar-accent: #a7d3f2;
+  --sidebar-accent-foreground: #475569;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: #f8b5d0;
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-space-grotesk: "Space Grotesk", serif;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+  --primary: #f8b5d0;
+  --primary-foreground: #475569;
+  --secondary: #334155;
+  --secondary-foreground: #f1f5f9;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #a7d3f2;
+  --accent-foreground: #0f172a;
+  --destructive: #e63946;
+  --destructive-foreground: #f1f5f9;
+  --border: #334155;
+  --input: #334155;
+  --ring: #f8b5d0;
+  --chart-1: #334155;
+  --chart-2: #475569;
+  --chart-3: #64748b;
+  --chart-4: #94a3b8;
+  --chart-5: #cbd5e1;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #f8b5d0;
+  --sidebar-primary-foreground: #475569;
+  --sidebar-accent: #a7d3f2;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #334155;
+  --sidebar-ring: #f8b5d0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* Agregando fuentes premium al sistema de tokens */
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-space-grotesk);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
