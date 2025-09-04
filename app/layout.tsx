@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Analytics } from '@vercel/analytics/next';
 import { Space_Grotesk, DM_Sans } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/contexts/cart-context"
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="es" className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}>
       <body>
         <CartProvider>{children}</CartProvider>
+        <Analytics />
       </body>
     </html>
   )
