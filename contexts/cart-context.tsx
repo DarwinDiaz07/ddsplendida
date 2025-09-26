@@ -3,18 +3,7 @@
 import type React from "react"
 
 import { createContext, useContext, useReducer, type ReactNode } from "react"
-
-interface Product {
-  id: number
-  name: string
-  brand: string
-  category: string
-  description: string
-  size: string
-  price: number
-  image: string
-  stock: number // Added stock property to Product interface
-}
+import { Product } from "@/types/types"
 
 interface CartItem extends Product {
   quantity: number

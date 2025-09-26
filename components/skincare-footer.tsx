@@ -21,7 +21,7 @@ export function SkincareFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="ghost" size="icon" className="hover:text-primary">
+                <Button variant="ghost" size="icon" className="hover:text-gray">
                   <Instagram className="h-5 w-5" />
                 </Button>
               </a>
