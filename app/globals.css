@@ -11,7 +11,7 @@
   --card-foreground: #475569; /* Texto oscuro en tarjetas */
   --popover: #ffffff; /* Blanco para popovers */
   --popover-foreground: #475569; /* Texto oscuro para popovers */
-  --primary: #f8b5d0; /* Rosa suave para elementos primarios */
+  --primary: rgb(181, 213, 247); /* Rosa suave para elementos primarios */
   --primary-foreground: #475569; /* Texto oscuro en elementos primarios */
   --secondary: #a7d3f2; /* Azul claro para elementos secundarios */
   --secondary-foreground: #ffffff; /* Texto blanco en elementos secundarios */
@@ -23,7 +23,6 @@
   --destructive-foreground: #ffffff; /* Texto blanco en acciones destructivas */
   --border: #e0e0e0; /* Gris claro para bordes */
   --input: #ffffff; /* Campos de entrada blancos */
-  --ring: #f8b5d0; /* Anillo rosa suave para estados de enfoque */
   --chart-1: #f0f4f8;
   --chart-2: #d1e7dd;
   --chart-3: #a7d3f2;

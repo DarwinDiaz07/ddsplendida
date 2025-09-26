@@ -14,13 +14,7 @@ interface CartMenuProps {
   onClose: () => void
 }
 
-function formatTotalCOP(n: number) {
-  return n.toLocaleString("es-CO", {
-    style: "currency",
-    currency: "COP",
-    maximumFractionDigits: 0,
-  })
-}
+
 
 export function CartMenu({ isOpen, onClose }: CartMenuProps) {
   const { state, dispatch } = useCart()
@@ -77,7 +71,7 @@ export function CartMenu({ isOpen, onClose }: CartMenuProps) {
                 {state.items.map((item) => (
                   <div key={item.id} className="flex items-center space-x-4 bg-muted/30 rounded-lg p-4">
                     <div className="relative w-16 h-16 rounded-md overflow-hidden bg-muted">
-                      <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
+                      <Image src={item.cartImage || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
                     </div>
 
                     <div className="flex-1 min-w-0">

@@ -18,7 +18,7 @@ function formatMoney(n: number, currency = "COP") {
 }
 
 export function buildWhatsAppMessage(items: CartItem[], currency = "COP"): string {
-  const header = " *Nuevo pedido — dd.splendida*\n\n"
+  const header = "🧴 *Nuevo pedido — dd.splendida*\n\n"
 
   const itemsList = items
     .map((item) => {
