@@ -107,9 +107,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
           {/* Marca y categoría */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="bg-accent text-accent-foreground">
-                {product.category}
-              </Badge>
+              {(Array.isArray(product.category) ? product.category : [product.category]).map((cat) => (
+                <Badge key={cat} variant="secondary" className="bg-accent text-accent-foreground">
+                  {cat}
+                </Badge>
+              ))}
               <span className="text-sm text-muted-foreground">{product.size}</span>
             </div>
             <div className="flex items-center gap-2">
@@ -145,7 +147,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           {/* Precio */}
           <div className="flex items-center gap-4">
             <span className="text-4xl font-bold text-foreground">${product.price.toLocaleString("es-CO")} COP</span>
-            {product.stock > 0 && product.stock <= 5 && (
+            {product.stock > 0 && product.stock <= 2 && (
               <Badge variant="destructive" className="bg-orange-100 text-orange-800">
                 ¡Solo quedan {product.stock}!
               </Badge>
@@ -250,7 +252,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
               {!isOutOfStock && (
                 <p className="text-sm text-muted-foreground text-center mt-3">
-                  Envío gratis a Barranquilla • Entrega en 2-3 días hábiles
+                  Envíos a Barranquilla • Entrega en 2-3 días hábiles
                 </p>
               )}
             </CardContent>
