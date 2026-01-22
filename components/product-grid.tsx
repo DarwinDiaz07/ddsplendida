@@ -23,15 +23,12 @@ export function ProductGrid() {
     return products.filter((product) => {
       // Category filter - Actualizando lógica para las 3 categorías solicitadas
       if (filters.category !== "todos") {
-        const categoryMap: { [key: string]: string } = {
-          limpiador: "Limpiador",
-          hidratante: "Hidratante",
-          "protector solar": "Protector Solar",
-        }
-
-        const expectedCategory = categoryMap[filters.category.toLowerCase()]
-        if (product.category !== expectedCategory) {
-          return false
+        const categoryFilter = filters.category.toLowerCase()
+        if (Array.isArray(product.category)) {
+          const hasCategory = product.category.some((cat) => cat.toLowerCase() === categoryFilter)
+          if (!hasCategory) return false
+        } else {
+          if (product.category.toLowerCase() !== categoryFilter) return false
         }
       }
 

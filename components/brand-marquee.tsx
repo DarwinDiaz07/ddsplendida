@@ -8,8 +8,12 @@ export function BrandMarquee() {
     "Beauty of Joseon",
     "Round Lab",
     "Pyunkang Yul",
-    "COSRX",
+    "Arencia",
     "Tocobo",
+    "Eqqualberry",
+    "Axis-Y",
+    "Celimax",
+    "Jumiso",
   ]
 
   return (

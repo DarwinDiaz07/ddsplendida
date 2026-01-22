@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react"
@@ -6,11 +7,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Search } from "lucide-react"
-import { SkinType } from "@/types/types"
-import next from "next"
+import { SkinType, ProductCategory } from "@/types/types"
+
+const SKIN_TYPE_LABELS: Record<SkinType, string> = {
+  normal: "Normal",
+  seca: "Seca",
+  grasa: "Grasa",
+  mixta: "Mixta",
+  sensible: "Sensible",
+};
+
+const CATEGORY_LABELS: Record<ProductCategory, string> = {
+  Limpiador: "Limpiadores",
+  Hidratante: "Hidratantes",
+  "Protector Solar": "Protectores Solares",
+  Serum: "Sérums",
+  Ampolla: "Ampollas",
+  Tratamiento: "Tratamientos",
+  Set: "Sets",
+  Aclarante: "Aclarantes",
+};
+
+const SKIN_TYPE_OPTIONS = Object.entries(SKIN_TYPE_LABELS) as [SkinType, string][];
+const CATEGORY_OPTIONS = Object.entries(CATEGORY_LABELS) as [ProductCategory, string][];
 
 interface FilterState {
-  category: string
+  category: ProductCategory | "todos"
   skinTypes: SkinType[]
   search: string
 }
@@ -19,104 +41,135 @@ interface ProductFiltersProps {
   onFilterChange: (filters: FilterState) => void
 }
 
+const CONFIG = {
+  showSkinFilter: false,
+} as const;
+
+const INITIAL_FILTERS: FilterState = {
+  category: "todos",
+  skinTypes: [],
+  search: "",
+};
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
+
 export function ProductFilters({ onFilterChange }: ProductFiltersProps) {
-  const [filters, setFilters] = useState<FilterState>({
-    category: "todos",
-    skinTypes: [],
-    search: "",
-  })
+  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
 
-  const categories = [
-    { value: "todos", label: "Todos" },
-    { value: "limpiador", label: "Limpiadores" },
-    { value: "hidratante", label: "Hidratantes" },
-    { value: "protector solar", label: "Protectores Solares" },
-  ]
-
-  
-  const skinTypes: Array<{id: SkinType; label: string}> = [
-    { id: "normal", label: "Normal" },
-    { id: "seca", label: "Seca" },
-    { id: "grasa", label: "Grasa" },
-    { id: "mixta", label: "Mixta" },
-    { id: "sensible", label: "Sensible" },
-  ]
-  
-  const SHOW_SKIN_FILTER = false;
-  
   const updateFilters = (newFilters: Partial<FilterState>) => {
-    const updatedFilters = { ...filters, ...newFilters }
-    setFilters(updatedFilters)
-    onFilterChange(updatedFilters)
-  }
+    const updatedFilters = { ...filters, ...newFilters };
+    setFilters(updatedFilters);
+    onFilterChange(updatedFilters);
+  };
 
   const handleSkinTypeChange = (skinType: SkinType, checked: boolean) => {
-    const next = checked
+    const updatedSkinTypes = checked
       ? [...filters.skinTypes, skinType]
-      : filters.skinTypes.filter((type) => type !== skinType)
+      : filters.skinTypes.filter((type) => type !== skinType);
 
-    updateFilters({ skinTypes: next })
-  }
+    updateFilters({ skinTypes: updatedSkinTypes });
+  };
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Search Bar */}
-        <div className="space-y-2">
-          <Label className="text-sm font-medium text-gray-700">Buscar</Label>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              placeholder="Buscar productos..."
-              value={filters.search}
-              onChange={(e) => updateFilters({ search: e.target.value })}
-              className="pl-10 border-gray-200 focus:border-blue-300 focus:blue-300 text-sky-500 bg-background"
-            />
-          </div>
-        </div>
+        
+        {/* Search */}
+        <SearchFilter 
+          value={filters.search} 
+          onChange={(search) => updateFilters({ search })} 
+        />
 
-        {/* Category Filter */}
-        <div className="space-y-2">
-          <Label className="text-sm font-medium text-gray-700">Categoría</Label>
-          <Select value={filters.category} onValueChange={(value) => updateFilters({ category: value })}>
-            <SelectTrigger className="border-gray-200 focus:border-blue-300 focus:blue-300 text-foreground">
-              <SelectValue placeholder="Seleccionar categoría" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((category) => (
-                <SelectItem key={category.value} value={category.value}>
-                  {category.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {/* Category */}
+        <CategoryFilter 
+          value={filters.category} 
+          onChange={(category) => updateFilters({ category })} 
+        />
 
-
-
-        {SHOW_SKIN_FILTER && (
-          <div className="space-y-2">
-            <Label className="text-sm font-medium text-gray-700">Tipo de Piel</Label>
-            <div className="space-y-2">
-              {skinTypes.map((skinType) => (
-                <div key={skinType.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={skinType.id}
-                    checked={filters.skinTypes.includes(skinType.id)}
-                    onCheckedChange={(checked) =>
-                      handleSkinTypeChange(skinType.id, checked as boolean)
-                    }
-                    className="border-gray-300 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
-                  />
-                  <Label htmlFor={skinType.id} className="text-sm text-gray-600">
-                    {skinType.label}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Skin Type */}
+        {CONFIG.showSkinFilter && (
+          <SkinTypeFilter
+            selected={filters.skinTypes}
+            onChange={handleSkinTypeChange}
+          />
         )}
       </div>
     </div>
-  )
+  );
+}
+
+// ============================================
+// SUB-COMPONENTS
+// ============================================
+
+function SearchFilter({ value, onChange }: { 
+  value: string; 
+  onChange: (value: string) => void 
+}) {
+  return (
+    <div className="space-y-2">
+      <Label className="text-sm font-medium text-gray-700">Buscar</Label>
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+        <Input
+          placeholder="Buscar productos..."
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="pl-10 border-gray-200 focus:border-blue-300 focus:ring-blue-300 text-sky-500 bg-background"
+        />
+      </div>
+    </div>
+  );
+}
+
+function CategoryFilter({ value, onChange }: { 
+  value: ProductCategory | "todos"; 
+  onChange: (value: ProductCategory | "todos") => void 
+}) {
+  return (
+    <div className="space-y-2">
+      <Label className="text-sm font-medium text-gray-700">Categoría</Label>
+      <Select value={value} onValueChange={(val) => onChange(val as ProductCategory | "todos")}>
+        <SelectTrigger className="border-gray-200 focus:border-blue-300 focus:ring-blue-300 text-foreground">
+          <SelectValue placeholder="Seleccionar categoría" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="todos">Todos</SelectItem>
+          {CATEGORY_OPTIONS.map(([value, label]) => (
+            <SelectItem key={value} value={value}>
+              {label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+function SkinTypeFilter({ selected, onChange }: { 
+  selected: SkinType[]; 
+  onChange: (skinType: SkinType, checked: boolean) => void 
+}) {
+  return (
+    <div className="space-y-2">
+      <Label className="text-sm font-medium text-gray-700">Tipo de Piel</Label>
+      <div className="space-y-2">
+        {SKIN_TYPE_OPTIONS.map(([id, label]) => (
+          <div key={id} className="flex items-center space-x-2">
+            <Checkbox
+              id={id}
+              checked={selected.includes(id)}
+              onCheckedChange={(checked) => onChange(id, checked as boolean)}
+              className="border-gray-300 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+            />
+            <Label htmlFor={id} className="text-sm text-gray-600 cursor-pointer">
+              {label}
+            </Label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

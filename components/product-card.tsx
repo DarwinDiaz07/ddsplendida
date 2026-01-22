@@ -40,9 +40,13 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-2">
-            <Badge variant="secondary" className="bg-accent text-accent-foreground">
-              {product.category}
-            </Badge>
+            <div className="flex items-center space-x-2">
+              {(Array.isArray(product.category) ? product.category : [product.category]).map((cat) => (
+                <Badge key={cat} variant="secondary" className="bg-accent text-accent-foreground">
+                  {cat}
+                </Badge>
+              ))}
+            </div>
             <span className="text-sm text-muted-foreground">{product.size}</span>
           </div>
 
