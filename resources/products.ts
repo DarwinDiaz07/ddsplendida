@@ -102,7 +102,7 @@ export const products = [
       "Crema hidratante calmante que fortalece la barrera cutánea.",
     size: "50ml",
     price: 69900,
-    stock: 6,
+    stock: 2,
     images: ["/pyunkang.png", "/pyunkang.png"],
     cartImage: "/pyunkang.png",
     benefits: [
@@ -178,7 +178,7 @@ export const products = [
     id: 7,
     name: "Vitamin C Booster Shot",
     brand: "Arencia",
-    category: ["Aclarante", "Serum"] as ProductCategory[],
+    category: ["Aclarante", "Tratamiento"] as ProductCategory[],
     skinTypes: ["seca", "normal", "mixta", "grasa"] as SkinType[],
     description:
       "Sérum concentrado de alta potencia con Vitamina C pura y derivados estabilizados (50,000ppm de 3-O-Ethyl Ascorbic Acid) que ilumina visiblemente el tono de piel y combate las manchas oscuras. Enriquecido con Glutatión para proteger contra el estrés ambiental, Niacinamida para refinar la textura y Pantenol + Alantoína para calmar e hidratar. Su textura gel-crema ligera se absorbe rápidamente sin dejar sensación pegajosa.",
@@ -238,7 +238,7 @@ export const products = [
     id: 9,
     name: "The Real Noni Energy Ampoule",
     brand: "Celimax",
-    category: "Ampolla" as ProductCategory,
+    category: ["Ampolla", "Aclarante"] as ProductCategory[],
     skinTypes: ["seca", "normal", "mixta", "sensible"] as SkinType[],
     description:
       "Ampolla best-seller con 71.77% de extracto de fruta Noni, un superalimento con más de 200 tipos de vitaminas y minerales que calma, hidrata y revitaliza la piel. Contiene Nano Pantenol para fortalecer la barrera cutánea, Colágeno Vegano Fermentado para firmeza, y Adenosina para combatir líneas finas. Su textura fresca y ligera se absorbe rápidamente, ideal para pieles irritadas, con rojeces o tono desigual. Dermatológicamente testado e hipoalergénico.",
@@ -329,7 +329,7 @@ export const products = [
     id: 12,
     name: "Niacinamide 20 Serum",
     brand: "Jumiso",
-    category: "Serum" as ProductCategory,
+    category: ["Aclarante", "Serum"] as ProductCategory[],
     skinTypes: ["grasa", "mixta", "normal", "sensible"] as SkinType[],
     description:
       "Sérum de alta potencia con 20% Niacinamida, Ácido Tranexámico (TXA) y Glutatión para un tratamiento intensivo de hiperpigmentación y poros. Clínicamente probado: -27.7% en manchas y -20% en rojeces en 2 semanas. El Triple Complejo Centella (Asiaticoside, Madecassic Acid, Asiatic Acid) calma irritaciones y fortalece la barrera. Contiene ácido hialurónico para hidratación. Sin fragancia, sin colorantes artificiales, ideal para pieles sensibles y con acné.",
@@ -424,7 +424,7 @@ export const products = [
     category: "Set" as ProductCategory,
     skinTypes: ["seca", "normal", "mixta", "sensible"] as SkinType[],
     description:
-      "Set dúo best-seller que incluye el Dark Spot Correcting Glow Serum (50ml) con 5% Niacinamida, Escualano y extracto de arroz para iluminar y atenuar manchas, más el Vegan Collagen Eye Serum (10ml) con colágeno vegetal, 5 péptidos y triple ácido hialurónico para el contorno de ojos. Resultados clínicos: -20% manchas oscuras en 4 semanas, -43% arrugas en ojos en 3 días. Vegano, cruelty-free, ideal para lograr el efecto 'glass skin' coreano.",
+      "Set dúo best-seller que incluye el Dark Spot Correcting Glow Serum (50ml) con 5% Niacinamida, Escualano y extracto de arroz para iluminar y atenuar manchas, más el Vegan Collagen Eye Serum (10ml) con colágeno vegetal, 5 péptidos y triple ácido hialurónico para el contorno de ojos. Vegano, cruelty-free, ideal para lograr el efecto 'glass skin' coreano.",
     miniDescription:
       "Set sérum iluminador + sérum de ojos para glass skin.",
     size: "50ml + 10ml",
